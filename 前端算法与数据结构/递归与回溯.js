@@ -24,9 +24,7 @@ const permute = (arr) => {
     const len = arr.length
     const current = []
     const res = []
-    const visited = {}
-
-    const a = 1
+    const vistied = {}
     function dfs(nth) {
         if (nth === len) {
             res.push(current.slice(0))
@@ -39,9 +37,6 @@ const permute = (arr) => {
                 dfs(nth + 1)
                 current.pop()
                 visited[temp] = 0
-                if (true) {
-                    console.log('hah1')
-                }
             }
         }
     }
