@@ -1,0 +1,5 @@
+{
+    "editor.wordWrapColumn": 200,
+    "prettier.semi": false,
+    "prettier.tabWidth": 4
+}
