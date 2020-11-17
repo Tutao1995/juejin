@@ -91,8 +91,74 @@ const inorderTraversal = (root) => {
 }
 
 /* 
- 层序遍历的衍生问题    
+ 层序遍历的衍生问题      思路： BFS+队列
 题目描述：给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+示例：
+
+  3
+ / \
+9  20
+  /  \
+ 15   7
+
+ [
+[3],
+[9,20],
+[15,7]
+]
+*/
+const levelOrder = (root) => {
+    if (!root) return []
+    let res = []
+    const queue = []
+    queue.push(root)
+    while (queue.length) {
+        const level = []
+        const len = queue.length
+        for (let i = 0; i < len; i++) {
+            const top = queue.shift() // 队列  出
+            level.push(top.value)
+            if (top.left) {
+                queue.push(top.left)
+            }
+            if (top.right) {
+                queue.push(top.right)
+            }
+        }
+        res.push(level)
+    }
+    return res
+}
+
+let test = {
+    value: 3,
+    left: {
+        value: 9,
+    },
+    right: {
+        value: 20,
+        left: {
+            value: 15,
+        },
+        right: {
+            value: 7,
+        },
+    },
+}
+
+/* 
+    反转二叉树  递归
+
 */
 
+const invertTree = (root) => {
+    if (!root) return root
+    let right = invertTree(root.right)
+    let left = invertTree(root.left)
+    root.left = right
+    root.right = left
+    return root
+}
 
+console.log(levelOrder(test))
