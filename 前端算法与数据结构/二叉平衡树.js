@@ -22,10 +22,10 @@ function isBalanced(root) {
         return Math.max(left, right) + 1
     }
     balance(root)
-    return false
+    return flag
 }
 
-// 平衡二叉树的构造   
+// 平衡二叉树的构造
 
 function balanceTree(root) {
     let array = []
