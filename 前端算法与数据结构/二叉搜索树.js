@@ -102,3 +102,13 @@ function sortedArrayToBST(array) {
         return cur
     }
 }
+
+function sortedArrayToBSTOther(array) {
+    if (!array.length) return null
+    const middle = Math.floor((0 + array.length - 1) / 2)
+    return {
+        value: array[middle],
+        left: middle ? sortedArrayToBSTOther(array.slice(0, middle)) : null,
+        right: middle ? sortedArrayToBSTOther(array.slice(middle, array.length - 1)) : null,
+    }
+}
