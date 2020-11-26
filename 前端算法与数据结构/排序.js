@@ -80,3 +80,80 @@ function insertSort(array) {
     }
     return array
 }
+/* 
+并归排序  分治思想
+
+分解子问题：将需要被排序的数组从中间分割为两半，然后再将分割出来的每个子数组各分割为两半，重复以上操作，直到单个子数组只有一个元素为止。
+求解每个子问题：从粒度最小的子数组开始，两两合并、确保每次合并出来的数组都是有序的。（这里的“子问题”指的就是对每个子数组进行排序）。
+合并子问题的解，得出大问题的解：当数组被合并至原有的规模时，就得到了一个完全排序的数组
+*/
+
+function mergeSort(array) {
+    let len = array.length
+    if (len === 1) return array //边界处理
+    let middle = Math.floor(len / 2)
+    let left = mergeSort(array.slice(0, middle))
+    let right = mergeSort(array.slice(middle, len))
+    return mergeArr(left, right)
+}
+
+function mergeArr(arr1, arr2) {
+    let res = []
+    let len1 = arr1.length
+    let len2 = arr2.length
+    let i = 0
+    let j = 0
+    while (i < len1 && j < len2) {
+        if (arr1[i] > arr2[j]) {
+            res.push(arr2[j])
+            j++
+        } else {
+            res.push(arr1[i])
+            i++
+        }
+    }
+    if (i < len1) {
+        res.concat(arr1.slice(i, len1))
+    } else {
+        res.concat(arr2.slice(j, len2))
+    }
+    return res
+}
+
+/* 
+    快速排序
+*/
+
+function quickSort(arr, left = 0, right = arr.length) {
+    if (arr.length > 1) {
+        let middle = partition(arr, left, right)
+        if (left < middle - 1) {
+            quickSort(arr, left, middle - 1)
+        }
+        if (middle < right) {
+            quickSort(arr, middle, right)
+        }
+    }
+    return arr
+}
+
+function partition(arr, left, right) {
+    let i = left,
+        j = right
+    let middle = Math.floor(right / 2)
+    let cu = arr[middle]
+    while (i <= j) {
+        while (arr[i] < cu) {
+            i++
+        }
+        while (arr[j] > cu) {
+            j--
+        }
+        if (i <= j) {
+            ;[arr[j], arr[i]] = [arr[i], arr[j]]
+            i++
+            j--
+        }
+    }
+    return i
+}
